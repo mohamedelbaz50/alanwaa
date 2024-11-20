@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "774579093093",
+    "project_id": "samer-weather-app",
+    "storage_bucket": "samer-weather-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774579093093:android:0534e792768e772434108c",
+        "android_client_info": {
+          "package_name": "iq.meteoseism.samer.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6qCGCSQeOc--_jvFC5KERp0nA_QwA02k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
