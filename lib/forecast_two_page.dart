@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class ForecastTwoPage extends StatefulWidget {
   const ForecastTwoPage({super.key});
@@ -27,7 +28,7 @@ class _ForecastTwoPageState extends State<ForecastTwoPage> {
     var date = DateTime.now().add(const Duration(days: 1));
     return Scaffold(
         appBar: AppBar(
-          title: const Text("تنبؤ جوي ليومين"),
+          title: const Text("تنبؤ جوي ليوم غد"),
           centerTitle: true,
         ),
         body: FutureBuilder(
@@ -51,7 +52,7 @@ class _ForecastTwoPageState extends State<ForecastTwoPage> {
                         children: [
                           Center(
                             child: Text(
-                              "${ConfigData.dayOfWeek[date.weekday - 1]} ${ConfigData.formatDate(date)}",
+                              "${ConfigData.dayOfWeek[date.weekday - 1]} ${DateFormat("yyyy/MM/dd", "ar").format(date)}",
                               style: const TextStyle(fontSize: 20),
                             ),
                           ),
@@ -62,11 +63,11 @@ class _ForecastTwoPageState extends State<ForecastTwoPage> {
                               "الحالة الجوية",
                               "كمية الامطار"),
                           ...(snapshot.data! as List).map((e) => _forecastRow(
-                              e['name'],
-                              e["min"],
-                              e["max"],
-                              e['status'],
-                              e['rain'])),
+                              e['name'].toString(),
+                              e["min"].toString(),
+                              e["max"].toString(),
+                              e['status'].toString(),
+                              e['rain'].toString())),
                         ],
                       ),
                     ),
@@ -102,14 +103,14 @@ class _ForecastTwoPageState extends State<ForecastTwoPage> {
           ),
           Image.asset(
             "assets/icons/$status.png",
-            height: 50,
+            height: 70,
           ),
           // const SizedBox(width: 16.0),
           SizedBox(
-            width: 50,
+            width: 70,
             child: Text(
               "$min°",
-              textAlign: TextAlign.end,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -118,10 +119,10 @@ class _ForecastTwoPageState extends State<ForecastTwoPage> {
             ),
           ),
           SizedBox(
-            width: 50,
+            width: 70,
             child: Text(
               "$max°",
-              textAlign: TextAlign.end,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -130,17 +131,18 @@ class _ForecastTwoPageState extends State<ForecastTwoPage> {
             ),
           ),
 
-          SizedBox(
-            width: 50,
-            child: Text(
-              rain,
-              textAlign: TextAlign.end,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   width: 60,
+          //   child: Text(
+          //     rain,
+          //     textAlign: TextAlign.center,
+          //     overflow: TextOverflow.ellipsis,
+          //     style: const TextStyle(
+          //       fontSize: 20,
+          //       fontWeight: FontWeight.bold,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -165,9 +167,10 @@ class _ForecastTwoPageState extends State<ForecastTwoPage> {
             ),
           ),
           SizedBox(
-            width: 50,
+            width: 70,
             child: Text(
               status,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -175,7 +178,7 @@ class _ForecastTwoPageState extends State<ForecastTwoPage> {
             ),
           ),
           SizedBox(
-            width: 50,
+            width: 70,
             child: Text(
               min,
               textAlign: TextAlign.center,
@@ -186,7 +189,7 @@ class _ForecastTwoPageState extends State<ForecastTwoPage> {
             ),
           ),
           SizedBox(
-            width: 50,
+            width: 70,
             child: Text(
               max,
               textAlign: TextAlign.center,
@@ -196,17 +199,17 @@ class _ForecastTwoPageState extends State<ForecastTwoPage> {
               ),
             ),
           ),
-          SizedBox(
-            width: 50,
-            child: Text(
-              rain,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   width: 60,
+          //   child: Text(
+          //     rain,
+          //     textAlign: TextAlign.center,
+          //     style: const TextStyle(
+          //       fontSize: 14,
+          //       fontWeight: FontWeight.bold,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

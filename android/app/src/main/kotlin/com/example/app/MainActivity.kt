@@ -1,4 +1,4 @@
-package com.samer.meteoseism.app
+package iq.meteoseism.samer.app
 
 
 import io.flutter.embedding.android.FlutterActivity

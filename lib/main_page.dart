@@ -68,16 +68,16 @@ class _MainPageState extends State<MainPage> {
                         }, "النشرة الجوية"),
                         _elevatedButton(() {
                           Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => const ForecastByCity()));
+                        }, "اختر المدينة"),
+                        _elevatedButton(() {
+                          Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) => const ForecastPage()));
                         }, "تنبؤ جوي لهذا اليوم"),
                         _elevatedButton(() {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) => const ForecastTwoPage()));
                         }, "تنبؤ جوي ليوم غدا"),
-                        _elevatedButton(() {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => const ForecastByCity()));
-                        }, "اختر المدينة"),
                       ],
                     ),
                   ),
@@ -96,8 +96,7 @@ class _MainPageState extends State<MainPage> {
 
   ElevatedButton _elevatedButton(Function()? onPressed, String text) {
     return ElevatedButton(
-        style: const ButtonStyle(
-            fixedSize: MaterialStatePropertyAll(Size(250, 40))),
+        style: ElevatedButton.styleFrom(fixedSize: const Size(250, 40)),
         onPressed: onPressed,
         child: Text(
           text,
