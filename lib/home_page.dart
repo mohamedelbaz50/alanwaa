@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:app/main.dart';
 import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -23,6 +24,9 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  // var _scale = 1.0;
+  // var _prevScale = 1.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +42,18 @@ class _HomePageState extends State<HomePage> {
           future: getData(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ...(snapshot.data! as List)
-                        .map((e) => Image.network("${ConfigData.apiHost}/$e"))
-                  ],
+              return InteractiveViewer(
+                constrained: false,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ...(snapshot.data! as List)
+                          .map((e) => Image.network("${ConfigData.apiHost}/$e"))
+                    ],
+                  ),
                 ),
               );
             }

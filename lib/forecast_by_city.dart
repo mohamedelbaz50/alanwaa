@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart' as intl;
 
 class ForecastByCity extends StatefulWidget {
   const ForecastByCity({super.key});
@@ -79,7 +80,7 @@ class _ForecastByCityState extends State<ForecastByCity> {
                       textDirection: TextDirection.rtl,
                       child: Column(children: [
                         Text(
-                          "${ConfigData.dayOfWeek[DateTime.now().weekday - 1]} ${ConfigData.formatDate(DateTime.now())}",
+                          "${ConfigData.dayOfWeek[DateTime.now().weekday - 1]} ${intl.DateFormat("yyyy/MM/dd", "ar").format(DateTime.now())}",
                           style: const TextStyle(fontSize: 20),
                         ),
                         SizedBox(
@@ -222,7 +223,7 @@ class _ForecastByCityState extends State<ForecastByCity> {
             Text(
               rain,
               style: const TextStyle(
-                fontSize: 30,
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
