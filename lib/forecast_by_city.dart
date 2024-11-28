@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart' as intl;
 
+import 'components/forecast_column.dart';
+
 class ForecastByCity extends StatefulWidget {
   const ForecastByCity({super.key});
 
@@ -139,15 +141,15 @@ class _ForecastByCityState extends State<ForecastByCity> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ...filteredData.asMap().entries.map((e) =>
-                                _forecastColumn(
-                                    ConfigData.dayOfWeek[DateTime.now()
+                                ForecastColumn(
+                                    name: ConfigData.dayOfWeek[DateTime.now()
                                             .add(Duration(days: e.key))
                                             .weekday -
                                         1],
-                                    e.value['max'],
-                                    e.value['min'],
-                                    e.value['status'],
-                                    e.value['rain']))
+                                    max: e.value['max'],
+                                    min: e.value['min'],
+                                    status: e.value['status'],
+                                    rain: e.value['rain']))
                           ],
                         ),
                         Expanded(
@@ -165,71 +167,6 @@ class _ForecastByCityState extends State<ForecastByCity> {
   Widget _loadingWidget() {
     return const Center(
       child: CircularProgressIndicator(),
-    );
-  }
-
-  Widget _forecastColumn(
-      String name, String max, String min, String status, String rain) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        color: Colors.blue[200],
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              name,
-              style: const TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const Divider(
-              color: Colors.black,
-            ),
-            const SizedBox(height: 30.0),
-            Image.asset(
-              "assets/icons/$status.png",
-              width: 60,
-            ),
-            const SizedBox(height: 30.0),
-            Text(
-              max,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: num.parse(max) > 48 ? Colors.red : Colors.black,
-              ),
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              min,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: num.parse(min) > 48 ? Colors.red : Colors.black,
-              ),
-            ),
-            const SizedBox(height: 4.0),
-            const Text(
-              "كمية المطر",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            // const SizedBox(height: 4.0),
-            Text(
-              rain,
-              style: const TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
